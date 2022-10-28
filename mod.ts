@@ -5,6 +5,12 @@ export async function LockScreen() {
         }).status();
     } else if (Deno.build.os === "linux") {
         await Deno.run({
+            cmd: ["dm-tool", "lock"]
+        }).status();
+        await Deno.run({
+            cmd: ["gnome-screensaver-command", "--lock"]
+        }).status();
+        await Deno.run({
             cmd: ["loginctl", "lock-session"]
         }).status();
     } else if (Deno.build.os === "darwin") {
